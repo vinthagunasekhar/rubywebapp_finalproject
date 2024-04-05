@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WatchedMediaApp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+
+  <%= javascript_importmap_tags %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        const flashMessages = document.querySelectorAll('.flash');
+        flashMessages.forEach(function(message) {
+          message.style.display = 'none';
+        });
+      }, 3000); // Hide flash messages after 3 seconds
+    });
+  </script>
+</head>
+
+<body id="<%= content_for?(:body_id) ? yield(:body_id) : '' %>" class="<%= content_for?(:body_class) ? yield(:body_class) : '' %>">
+  <div class="flash-messages">
+    <% flash.each do |key, message| %>
+      <div class="flash <%= key %>"><%= message %></div>
+    <% end %>
+  </div>
+
+  <% if session[:user_id] %>
+    <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-button', form: {class: 'logout-form'} %>
+  <% end %>
+
+  <%= yield %>
+</body>
+</html>

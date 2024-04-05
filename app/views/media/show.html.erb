@@ -1,0 +1,30 @@
+<!-- app/views/media/show.html.erb -->
+<div class="media-show-container">
+  <h1 class="media-title"><%= @medium.title %></h1>
+
+  <table class="media-details-table">
+    <tr>
+      <th>Description</th>
+      <td><%= @medium.description %></td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td><%= @medium.media_type %></td>
+    </tr>
+    <tr>
+      <th>OTT Platform</th>
+      <td><%= @medium.ott %></td>
+    </tr>
+    <tr>
+      <th>Total Seasons</th>
+      <td><%= @medium.total_seasons %></td>
+    </tr>
+    <tr>
+      <th>Seasons Watched</th>
+      <td><%= @medium.seasons_watched %></td>
+    </tr>
+  </table>
+
+  <%= link_to 'Edit', edit_medium_path(@medium), class: 'btn btn-edit' %> |
+  <%= link_to 'Back', media_path, class: 'btn btn-back' %>
+</div>

@@ -1,0 +1,20 @@
+<h1><%= @episode.title %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @episode.description %>
+</p>
+
+<p>
+  <strong>Season Number:</strong>
+  <%= @episode.season_number %>
+</p>
+
+<p>
+  <strong>Episode Number:</strong>
+  <%= @episode.episode_number %>
+</p>
+
+<%= link_to 'Edit', edit_medium_episode_path(@medium, @episode) %> |
+<%= link_to 'Back', medium_path(@medium) %>
+

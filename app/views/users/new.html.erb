@@ -1,0 +1,25 @@
+<!-- app/views/users/new.html.erb -->
+<div class="auth-container">
+  <div class="auth-card">
+    <h1 class="auth-title">WatchedMediaApp</h1>
+    <p class="auth-tagline">A new way to blog your cinema world.</p>
+    <%= form_with(model: User.new, local: true) do |form| %>
+      <div class="auth-field">
+        <%= form.label :email %>
+        <%= form.email_field :email, required: true, autofocus: true, class: 'auth-input' %>
+      </div>
+      <div class="auth-field">
+        <%= form.label :password %>
+        <%= form.password_field :password, required: true, class: 'auth-input' %>
+      </div>
+      <div class="auth-field">
+        <%= form.label :password_confirmation, "Confirm Password" %>
+        <%= form.password_field :password_confirmation, required: true, class: 'auth-input' %>
+      </div>
+      <div class="auth-actions">
+        <%= form.submit "Sign Up", class: "auth-button auth-button--primary" %>
+      </div>
+    <% end %>
+    <%= link_to 'Log In', login_path, class: 'auth-link' %>
+  </div>
+</div>

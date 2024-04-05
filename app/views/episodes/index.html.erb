@@ -1,0 +1,30 @@
+<h1>Episodes</h1>
+
+<%= link_to 'Add New Episode', new_medium_episode_path(@medium) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Season</th>
+      <th>Episode</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @episodes.each do |episode| %>
+      <tr>
+        <td><%= episode.title %></td>
+        <td><%= episode.description %></td>
+        <td><%= episode.season_number %></td>
+        <td><%= episode.episode_number %></td>
+        <td>
+          <%= link_to 'Show', medium_episode_path(@medium, episode) %>
+          <%= link_to 'Edit', edit_medium_episode_path(@medium, episode) %>
+          <%= link_to 'Delete', medium_episode_path(@medium, episode), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

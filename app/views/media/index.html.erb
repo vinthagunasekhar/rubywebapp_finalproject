@@ -1,0 +1,38 @@
+<!-- app/views/media/index.html.erb -->
+
+<%= link_to 'Add New Media', new_medium_path, class: 'add-media-btn' %>
+
+<table class="media-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Ott</th>
+      <th>Total Seasons</th>
+      <th>Seasons Watched</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @media.each do |medium| %>
+      <tr>
+        <td><%= medium.title %></td>
+        <td><%= medium.description %></td>
+        <td><%= medium.media_type %></td>
+        <td><%= medium.ott %></td>
+        <td><%= medium.total_seasons %></td>
+        <td><%= medium.seasons_watched %></td>
+        <td>
+          <%= link_to 'Show', medium, class: 'btn btn-show' %>
+          <%= link_to 'Edit', edit_medium_path(medium), class: 'btn btn-edit' %>
+          <%= form_with(url: medium_path(medium), method: :delete, local: true) do |form| %>
+        <%= form.submit 'Delete', data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

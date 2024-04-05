@@ -1,0 +1,39 @@
+<!-- app/views/users/show.html.erb -->
+<div class="user-profile-container">
+  <h1>User Profile</h1>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <%= link_to 'View Profile', user_profile_path(@user), class: 'btn btn-view-profile' %>
+
+  <h2>Your Media</h2>
+  <table class="user-media-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>OTT Platform</th>
+        <th>Total Seasons</th>
+        <th>Seasons Watched</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @media.each do |medium| %>
+        <tr>
+          <td><%= medium.title %></td>
+          <td><%= medium.description %></td>
+          <td><%= medium.media_type %></td>
+          <td><%= medium.ott %></td>
+          <td><%= medium.total_seasons %></td>
+          <td><%= medium.seasons_watched %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Add New Media', new_medium_path, class: 'btn btn-add-media' %>
+</div>
