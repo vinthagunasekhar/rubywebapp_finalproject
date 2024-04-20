@@ -1,12 +1,12 @@
-<h1>Edit Profile</h1>
-
-<%= form_with(model: [@user, @profile], local: true) do |form| %>
-  <div>
-    <%= form.label :bio %>
-    <%= form.text_area :bio %>
-  </div>
-
-  <%= form.submit "Update Profile" %>
-<% end %>
-
-<%= link_to 'Back', user_profile_path(@user) %>
+<!-- app/views/profiles/edit.html.erb -->
+<div class="profile-page edit-profile">
+  <h1>Edit Profile</h1>
+  <%= form_with(model: [@user, @profile], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :bio, class: 'form-label' %>
+      <%= form.text_area :bio, class: 'text-area' %>
+    </div>
+    <%= form.submit "Update Profile", class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to 'Back to Profile', user_profile_path(@user), class: 'btn btn-secondary' %>
+</div>

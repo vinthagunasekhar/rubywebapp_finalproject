@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  before_action :require_user
+  before_action :authenticate_user!
   before_action :set_medium
   before_action :set_episode, only: [:show, :edit, :update, :destroy]
 
@@ -37,15 +37,15 @@ class EpisodesController < ApplicationController
 
   private
 
-    def set_medium
-      @medium = Medium.find(params[:medium_id])
-    end
+  def set_medium
+    @medium = Medium.find(params[:medium_id])
+  end
 
-    def set_episode
-      @episode = @medium.episodes.find(params[:id])
-    end
+  def set_episode
+    @episode = @medium.episodes.find(params[:id])
+  end
 
-    def episode_params
-      params.require(:episode).permit(:title, :description, :season_number, :episode_number)
-    end
+  def episode_params
+    params.require(:episode).permit(:title, :description, :season_number, :episode_number)
+  end
 end

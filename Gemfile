@@ -66,3 +66,12 @@ group :test do
   gem "selenium-webdriver"
 end
 gem 'bcrypt', '~> 3.1.7'
+gem 'devise'
+# Gemfile
+gem 'image_processing', '~> 1.2'
+# Gemfile
+group :development do
+  gem 'letter_opener'
+end
+gem 'ruby-vips'
+gem 'jwt'

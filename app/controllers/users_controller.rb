@@ -1,35 +1,24 @@
+# app/controllers/users_controller.rb
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :index]
   before_action :set_user, only: [:show]
 
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:notice] = 'Sign up was successful. Now, please log in.'
-      redirect_to login_path
+  def show
+    if @user
+      @media = @user.media
     else
-      render :new
+      # Redirect to a specific path if user is not found
+      redirect_to authenticated_root_path, alert: 'User not found.'
     end
   end
-
-  def show
-    @media = @user.media
+  def index
+    # Assuming you want to redirect to the current user's profile
+    redirect_to user_path(current_user)
   end
 
   private
 
   def set_user
     @user = User.find_by(id: params[:id])
-    unless @user
-      flash[:alert] = 'User not found. Please log in.'
-      redirect_to login_path
-    end
-  end
-
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

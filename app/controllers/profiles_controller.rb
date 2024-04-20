@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user
 
   def show
@@ -19,14 +20,13 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = @user.profile
-    redirect_to new_user_profile_path(@user) unless @profile
+    @profile = @user.profile || redirect_to(new_user_profile_path(@user))
   end
 
   def update
     @profile = @user.profile
     if @profile.update(profile_params)
-      redirect_to media_url, notice: 'Profile updated successfully.'
+      redirect_to user_profile_path(@user), notice: 'Profile updated successfully.'
     else
       render :edit
     end

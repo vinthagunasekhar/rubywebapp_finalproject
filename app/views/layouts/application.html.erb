@@ -9,7 +9,6 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-
   <%= javascript_importmap_tags %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script>
@@ -31,8 +30,12 @@
     <% end %>
   </div>
 
-  <% if session[:user_id] %>
-    <%= button_to 'Logout', logout_path, method: :delete, class: 'logout-button', form: {class: 'logout-form'} %>
+  <% if user_signed_in? %>  <!-- This checks if a user is logged in with Devise -->
+    <%= form_tag destroy_user_session_path, method: :delete do %>
+      <%= submit_tag 'Logout', class: 'btn btn-secondary logout-button' %>
+    <% end %>
+  <% else %>
+    <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary' %>
   <% end %>
 
   <%= yield %>

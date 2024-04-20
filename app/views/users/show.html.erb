@@ -1,39 +1,49 @@
 <!-- app/views/users/show.html.erb -->
 <div class="user-profile-container">
   <h1>User Profile</h1>
-
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
-
+  <p><strong>Email:</strong> <%= @user.email %></p>
   <%= link_to 'View Profile', user_profile_path(@user), class: 'btn btn-view-profile' %>
 
   <h2>Your Media</h2>
   <table class="user-media-table">
     <thead>
       <tr>
+        <th>Image</th>
         <th>Title</th>
         <th>Description</th>
         <th>Type</th>
         <th>OTT Platform</th>
         <th>Total Seasons</th>
         <th>Seasons Watched</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @media.each do |medium| %>
         <tr>
+          <td>
+            <% if medium.image.attached? %>
+              <%= image_tag medium.image.variant(resize_to_limit: [100, 100]), class: "img-thumbnail" %>
+            <% else %>
+              <p>No Image</p>
+            <% end %>
+          </td>
           <td><%= medium.title %></td>
           <td><%= medium.description %></td>
           <td><%= medium.media_type %></td>
           <td><%= medium.ott %></td>
           <td><%= medium.total_seasons %></td>
           <td><%= medium.seasons_watched %></td>
+          <td>
+            <%= link_to 'Show', medium_path(medium), class: 'btn btn-show' %>
+            <%= link_to 'Edit', edit_medium_path(medium), class: 'btn btn-edit' %>
+            <%= form_with(model: medium, method: :delete, local: true) do |form| %>
+              <%= form.submit 'Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
   <%= link_to 'Add New Media', new_medium_path, class: 'btn btn-add-media' %>
 </div>
